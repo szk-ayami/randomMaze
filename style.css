@@ -1,0 +1,29 @@
+body{
+    height: 100vh;
+    text-align: center;
+}
+
+.settingOfRowAndCol{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* flex-basis: auto; */
+    
+    margin: 0 auto;
+}
+
+.settingOfRowAndCol select{
+    height: 5%;
+}
+
+#inputRow {
+    text-align: center;
+}
+
+#inputCol {
+    text-align: center;
+}
+
+#crossKey{
+    height: 40px;
+}
