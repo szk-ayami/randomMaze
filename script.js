@@ -106,13 +106,15 @@ function printMaze(mazeArray, inputRow, inputCol) {
   const mazeArrayColor = mazeArray.map((list) => ({ ...list }));
 
   // 0を紺に、1を薄青に変換
-  // 壁：紺、通路：薄青
+  // 壁：紺、通路：薄青、現在地：赤
   for (let i = 0; i < inputRow; i++) {
     for (let j = 0; j < inputCol; j++) {
       if (mazeArrayColor[i][j] === 0) {
         mazeArrayColor[i][j] = "#050505";
-      } else {
+      } else if (mazeArrayColor[i][j] === 1) {
         mazeArrayColor[i][j] = "#F0F0F0";
+      } else if (mazeArrayColor[i][j] === 2) {
+        mazeArrayColor[i][j] = "#DC143C";
       }
     }
   }
@@ -121,10 +123,10 @@ function printMaze(mazeArray, inputRow, inputCol) {
   for (let i = 0; i < inputRow; i++) {
     for (let j = 0; j < inputCol; j++) {
       tdArray[i][j].style.backgroundColor = mazeArrayColor[i][j];
-      tdArray[i][j].style.height = "15px";
-      tdArray[i][j].style.width = "15px";
+      tdArray[i][j].style.height = "17px";
+      tdArray[i][j].style.width = "17px";
       tdArray[i][j].style.textAlign = "center";
-      tdArray[i][j].style.fontSize = "12px";
+      tdArray[i][j].style.fontSize = "11px";
     }
   }
 
@@ -165,39 +167,157 @@ function clicked() {
   const inputCol = Number(col.value);
 
   // mazeに0で埋めたrow行col列の配列を作る
-  const maze = zeros(inputRow, inputCol);
+  maze = zeros(inputRow, inputCol);
 
   // 迷路を生成
   makeMazeBase(maze, inputRow, inputCol);
 
+  // 初期地点を設定
+  maze[1][1] = 2;
+
   // 迷路を出力
   printMaze(maze, inputRow, inputCol);
+
+  // console.log(maze);
 }
 
 // 「↑」が押された時
 function up() {
-  // 初期地点　1,1
+  // 行列の数を取得する
+  const row = document.getElementById("inputRow");
+  const col = document.getElementById("inputCol");
 
-  // i-1, j
-  console.log("up");
+  const inputRow = Number(row.value);
+  const inputCol = Number(col.value);
+
+  // 現在地点のindexを取得
+  let currentIndexY = 0;
+  let currentIndexX = 0;
+
+  for (let i = 0; i < inputRow; i++) {
+    if (maze[i].indexOf(2) !== -1) {
+      currentIndexY = i;
+      currentIndexX = maze[i].indexOf(2);
+    }
+  }
+  // console.log(currentIndexY, currentIndexX);
+
+  // 上が通路なら進んで、元の場所を通路に戻す
+  if (maze[currentIndexY - 1][currentIndexX] === 1) {
+    maze[currentIndexY][currentIndexX] = 1;
+    maze[currentIndexY - 1][currentIndexX] = 2;
+  }
+
+  printMaze(maze, inputRow, inputCol);
+
+  // ゴール表示
+  // if (currentIndexY - 1 === inputRow - 2 && currentIndexX === inputCol - 2) {
+  //   alert("クリアおめでとう！");
+  // }
 }
 
 // 「↓」が押された時
 function down() {
-  // i+1, j
-  console.log("down");
+  // 行列の数を取得する
+  const row = document.getElementById("inputRow");
+  const col = document.getElementById("inputCol");
+
+  const inputRow = Number(row.value);
+  const inputCol = Number(col.value);
+
+  // 現在地点のindexを取得
+  let currentIndexY = 0;
+  let currentIndexX = 0;
+
+  for (let i = 0; i < inputRow; i++) {
+    if (maze[i].indexOf(2) !== -1) {
+      currentIndexY = i;
+      currentIndexX = maze[i].indexOf(2);
+    }
+  }
+  // console.log(currentIndexY, currentIndexX);
+
+  // 上が通路なら進んで、元の場所を通路に戻す
+  if (maze[currentIndexY + 1][currentIndexX] === 1) {
+    maze[currentIndexY][currentIndexX] = 1;
+    maze[currentIndexY + 1][currentIndexX] = 2;
+  }
+
+  printMaze(maze, inputRow, inputCol);
+
+  // ゴール表示
+  // if (currentIndexY + 1 === inputRow - 2 && currentIndexX === inputCol - 2) {
+  //   alert("クリアおめでとう！");
+  // }
 }
 
 // 「→」が押された時
 function right() {
-  // i, j+1
-  console.log("right");
+  // 行列の数を取得する
+  const row = document.getElementById("inputRow");
+  const col = document.getElementById("inputCol");
+
+  const inputRow = Number(row.value);
+  const inputCol = Number(col.value);
+
+  let currentIndexY = 0;
+  let currentIndexX = 0;
+
+  for (let i = 0; i < inputRow; i++) {
+    if (maze[i].indexOf(2) !== -1) {
+      currentIndexY = i;
+      currentIndexX = maze[i].indexOf(2);
+    }
+  }
+  // console.log(currentIndexY, currentIndexX);
+
+  // 上が通路なら進んで、元の場所を通路に戻す
+  if (maze[currentIndexY][currentIndexX + 1] === 1) {
+    maze[currentIndexY][currentIndexX] = 1;
+    maze[currentIndexY][currentIndexX + 1] = 2;
+  }
+
+  printMaze(maze, inputRow, inputCol);
+
+  // ゴール表示
+  // if (currentIndexY === inputRow - 2 && currentIndexX + 1 === inputCol - 2) {
+  //   alert("クリアおめでとう！");
+  // }
 }
 
 // 「←」が押された時
 function left() {
-  // i, j-1
-  console.log("left");
+  // 行列の数を取得する
+  const row = document.getElementById("inputRow");
+  const col = document.getElementById("inputCol");
+
+  const inputRow = Number(row.value);
+  const inputCol = Number(col.value);
+
+  // 現在地点のindexを取得
+  let currentIndexY = 0;
+  let currentIndexX = 0;
+
+  for (let i = 0; i < inputRow; i++) {
+    if (maze[i].indexOf(2) !== -1) {
+      currentIndexY = i;
+      currentIndexX = maze[i].indexOf(2);
+    }
+  }
+  // console.log(currentIndexY, currentIndexX);
+
+  // 上が通路なら進んで、元の場所を通路に戻す
+  if (maze[currentIndexY][currentIndexX - 1] === 1) {
+    maze[currentIndexY][currentIndexX] = 1;
+    maze[currentIndexY][currentIndexX - 1] = 2;
+  }
+
+  printMaze(maze, inputRow, inputCol);
+
+  // ゴール表示
+  // if (currentIndexY === inputRow - 2 && currentIndexX - 1 === inputCol - 2) {
+  //   alert("クリアおめでとう！");
+  // }
 }
 
 let mazeMake = document.getElementById("generateMaze");
@@ -215,21 +335,25 @@ const dy = [
   [-1, -2],
 ]; //y軸のベクトル
 
+let maze = [];
 mazeMake.addEventListener("click", clicked);
 
-let upKey = document.getElementById("up");
-let downKey = document.getElementById("down");
-let rightKey = document.getElementById("right");
-let leftKey = document.getElementById("left");
-
-// 上移動
-upKey.addEventListener("click", up);
-
-// 下移動
-downKey.addEventListener("click", down);
-
-// 右移動
-rightKey.addEventListener("click", right);
-
-// 左移動
-leftKey.addEventListener("click", left);
+document.addEventListener("keydown", function (event) {
+  if (event.key === "ArrowUp") {
+    // console.log("上矢印キーが押されました。");
+    event.preventDefault();
+    up();
+  } else if (event.key === "ArrowDown") {
+    // console.log("下矢印キーが押されました。");
+    event.preventDefault();
+    down();
+  } else if (event.key === "ArrowLeft") {
+    // console.log("左矢印キーが押されました。");
+    event.preventDefault();
+    left();
+  } else if (event.key === "ArrowRight") {
+    // console.log("右矢印キーが押されました。");
+    event.preventDefault();
+    right();
+  }
+});
