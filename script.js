@@ -177,8 +177,6 @@ function clicked() {
 
   // 迷路を出力
   printMaze(maze, inputRow, inputCol);
-
-  // console.log(maze);
 }
 
 // 「↑」が押された時
@@ -200,7 +198,6 @@ function up() {
       currentIndexX = maze[i].indexOf(2);
     }
   }
-  // console.log(currentIndexY, currentIndexX);
 
   // 上が通路なら進んで、元の場所を通路に戻す
   if (maze[currentIndexY - 1][currentIndexX] === 1) {
@@ -209,11 +206,6 @@ function up() {
   }
 
   printMaze(maze, inputRow, inputCol);
-
-  // ゴール表示
-  // if (currentIndexY - 1 === inputRow - 2 && currentIndexX === inputCol - 2) {
-  //   alert("クリアおめでとう！");
-  // }
 }
 
 // 「↓」が押された時
@@ -235,7 +227,6 @@ function down() {
       currentIndexX = maze[i].indexOf(2);
     }
   }
-  // console.log(currentIndexY, currentIndexX);
 
   // 上が通路なら進んで、元の場所を通路に戻す
   if (maze[currentIndexY + 1][currentIndexX] === 1) {
@@ -244,11 +235,6 @@ function down() {
   }
 
   printMaze(maze, inputRow, inputCol);
-
-  // ゴール表示
-  // if (currentIndexY + 1 === inputRow - 2 && currentIndexX === inputCol - 2) {
-  //   alert("クリアおめでとう！");
-  // }
 }
 
 // 「→」が押された時
@@ -269,7 +255,6 @@ function right() {
       currentIndexX = maze[i].indexOf(2);
     }
   }
-  // console.log(currentIndexY, currentIndexX);
 
   // 上が通路なら進んで、元の場所を通路に戻す
   if (maze[currentIndexY][currentIndexX + 1] === 1) {
@@ -278,11 +263,6 @@ function right() {
   }
 
   printMaze(maze, inputRow, inputCol);
-
-  // ゴール表示
-  // if (currentIndexY === inputRow - 2 && currentIndexX + 1 === inputCol - 2) {
-  //   alert("クリアおめでとう！");
-  // }
 }
 
 // 「←」が押された時
@@ -304,7 +284,6 @@ function left() {
       currentIndexX = maze[i].indexOf(2);
     }
   }
-  // console.log(currentIndexY, currentIndexX);
 
   // 上が通路なら進んで、元の場所を通路に戻す
   if (maze[currentIndexY][currentIndexX - 1] === 1) {
@@ -313,11 +292,6 @@ function left() {
   }
 
   printMaze(maze, inputRow, inputCol);
-
-  // ゴール表示
-  // if (currentIndexY === inputRow - 2 && currentIndexX - 1 === inputCol - 2) {
-  //   alert("クリアおめでとう！");
-  // }
 }
 
 let mazeMake = document.getElementById("generateMaze");
@@ -340,19 +314,15 @@ mazeMake.addEventListener("click", clicked);
 
 document.addEventListener("keydown", function (event) {
   if (event.key === "ArrowUp") {
-    // console.log("上矢印キーが押されました。");
     event.preventDefault();
     up();
   } else if (event.key === "ArrowDown") {
-    // console.log("下矢印キーが押されました。");
     event.preventDefault();
     down();
   } else if (event.key === "ArrowLeft") {
-    // console.log("左矢印キーが押されました。");
     event.preventDefault();
     left();
   } else if (event.key === "ArrowRight") {
-    // console.log("右矢印キーが押されました。");
     event.preventDefault();
     right();
   }
