@@ -13,9 +13,11 @@
 
 <body>
   <h2 id="title">ランダム迷路</h2>
-  
+
   <!-- ボタン -->
   <!-- <input id="inputRow"> -->
+  <p class="description">行数と列数を選択すると迷路が生成されます。</p>
+  <p class="crossKeyDescription">十字キーで操作できます。</p>
   <div class="settingOfRowAndCol">
     <p>row = </p>
     <select name="row" id="inputRow">
@@ -39,17 +41,25 @@
       <option value="95">95</option>
     </select>
   </div>
-  <button id="generateMaze" type="button">迷路生成</button>
-  <div id="output"></div>
-  <!-- <canvas id="maze" width="1000" height="1000"></canvas> -->
-
-  <div id="crossKey">
-    <button id="up" type="button">↑</button>
-    <button id="down" type="button">↓</button>
-    <button id="right" type="button">→</button>
-    <button id="left" type="button">←</button>
+  <div class="generateMazeButton">
+    <button id="generateMaze" type="button">迷路生成</button>
   </div>
-</body>
+ 
+  <!-- <div id="output"></div> -->
+
+  <!-- <div id="crossKey">
+    <div id="upKey">
+      <button class="key" id="up" type="button" value="up">↑</button>
+    </div>
+    <div id="rightLeftKey">
+      <button class="key" id="left" type="button" value="left">←</button>
+      <button class="key" id="right" type="button" value="right">→</button>
+    </div>
+    <div id="downKey">
+      <button class="key" id="down" type="button" value="down">↓</button>
+    </div>
+  </div>
+</body> -->
 
 <script type="text/javascript" src="script.js"></script>
 
