@@ -3,6 +3,14 @@ body{
     text-align: center;
 }
 
+.description {
+    margin: 0;
+}
+
+.crossKeyDescription{
+    margin: 0;
+}
+
 .settingOfRowAndCol{
     display: flex;
     justify-content: center;
@@ -24,6 +32,14 @@ body{
     text-align: center;
 }
 
-#crossKey{
+.generateMazeButton{
     height: 40px;
+}
+
+#crossKey{
+    height: 80px;
+}
+
+#upKey{
+    margin-top: 5px;
 }
