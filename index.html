@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+
+  <link href="style.css" rel="stylesheet" type="text/css">
+  
+  <title>ランダム迷路</title>
+</head>
+
+<body>
+  <h2 id="title">ランダム迷路</h2>
+  
+  <!-- ボタン -->
+  <!-- <input id="inputRow"> -->
+  <div class="settingOfRowAndCol">
+    <p>row = </p>
+    <select name="row" id="inputRow">
+      <option value="5">5</option>
+      <option value="15">15</option>
+      <option value="25">25</option>
+      <option value="35">35</option>
+    </select>
+    <!-- <input id="inputCol"> -->
+    <p>col = </p>
+    <select name="col" id="inputCol">
+      <option value="5">5</option>
+      <option value="15">15</option>
+      <option value="25">25</option>
+      <option value="35">35</option>
+      <option value="45">45</option>
+      <option value="55">55</option>
+      <option value="65">65</option>
+      <option value="75">75</option>
+      <option value="85">85</option>
+      <option value="95">95</option>
+    </select>
+  </div>
+  <button id="generateMaze" type="button">迷路生成</button>
+  <div id="output"></div>
+  <!-- <canvas id="maze" width="1000" height="1000"></canvas> -->
+
+  <div id="crossKey">
+    <button id="up" type="button">↑</button>
+    <button id="down" type="button">↓</button>
+    <button id="right" type="button">→</button>
+    <button id="left" type="button">←</button>
+  </div>
+</body>
+
+<script type="text/javascript" src="script.js"></script>
+
+</html>
