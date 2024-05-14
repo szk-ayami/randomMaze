@@ -2,20 +2,23 @@
 
 // 1行目に記載している 'use strict' は削除しないでください
 
-function zeros(row, col) {
-  if (row < 1 || col < 1) {
+function zeros(mazeArray) {
+  const row = document.getElementById("inputRow");
+  const col = document.getElementById("inputCol");
+
+  const inputRow = Number(row.value);
+  const inputCol = Number(col.value);
+
+  if (inputRow < 1 || inputCol < 1) {
     throw new Error("IndexError");
   }
-  let zeros = [];
-  for (let i = 0; i < row; i++) {
+  for (let i = 0; i < inputRow; i++) {
     let tmp = [];
-    for (let j = 0; j < col; j++) {
+    for (let j = 0; j < inputCol; j++) {
       tmp.push(0);
     }
-    zeros.push(tmp);
+    mazeArray.push(tmp);
   }
-
-  return zeros;
 }
 
 // 初期地点を決めて、迷路を作るよう指示する
@@ -39,8 +42,6 @@ function makeMazeBase(mazeArray, inputRow, inputCol) {
 
   initialPointY.push(inputRow - 2);
   initialPointX.push(inputCol - 2);
-
-  // console.log(initialPointY, initialPointX);
 
   mazeArray[initialPointY[0]][initialPointX[0]] = 1;
 
@@ -123,7 +124,7 @@ function printMaze(mazeArray, inputRow, inputCol) {
   }
 
   // deep copy
-  const mazeArrayColor = mazeArray.map((list) => ({ ...list }));
+  const mazeArrayColor = mazeArray.map((list) => [...list]);
 
   // 0を紺に、1を薄青に変換
   // 壁：紺、通路：薄青、現在地：赤
@@ -190,13 +191,14 @@ function printMaze(mazeArray, inputRow, inputCol) {
   // ゴール
   if (currentIndexY === inputRow - 2 && currentIndexX === inputCol - 2) {
     clearedMaze();
-  } else {
-    removeClear();
+    // timerStop();
   }
 }
 
 // 「迷路生成」が押された時
 function clicked() {
+  // timerStart();
+
   // 行列の数を取得する
   const row = document.getElementById("inputRow");
   const col = document.getElementById("inputCol");
@@ -205,7 +207,11 @@ function clicked() {
   const inputCol = Number(col.value);
 
   // mazeに0で埋めたrow行col列の配列を作る
-  maze = zeros(inputRow, inputCol);
+  if (maze.length !== 0) {
+    maze.splice(0);
+  }
+  zeros(maze);
+  const zeroMaze = maze.map((list) => [...list]);
 
   // 迷路を生成
   makeMazeBase(maze, inputRow, inputCol);
@@ -334,7 +340,6 @@ function left() {
 
 function clearedMaze() {
   // クリアを表示
-  // console.log(`Congratulations! Maze clear!`);
   window.location.href = "clear.html";
 }
 
@@ -363,7 +368,7 @@ const dy = [
   [-1, -2],
 ];
 
-let maze = [];
+const maze = [];
 let mazeMake = document.getElementById("generateMaze");
 mazeMake.addEventListener("click", clicked);
 
