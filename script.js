@@ -22,9 +22,29 @@ function zeros(row, col) {
 function makeMazeBase(mazeArray, inputRow, inputCol) {
   // mazeArray = all 壁
   // 初期地点
-  mazeArray[1][1] = 1;
+  // let initialPointYRandom = 0;
+  // let initialPointXRandom = 0;
 
-  makeMaze(mazeArray, 1, 1, inputRow, inputCol);
+  // while (initialPointYRandom % 2 === 0 || initialPointXRandom % 2 === 0) {
+  //   initialPointYRandom = Math.floor(Math.random() * inputRow);
+  //   initialPointXRandom = Math.floor(Math.random() * inputCol);
+  // }
+  // console.log(initialPointYRandom, initialPointXRandom);
+
+  // initialPointY.push(initialPointYRandom);
+  // initialPointX.push(initialPointXRandom);
+
+  initialPointY.pop();
+  initialPointX.pop();
+
+  initialPointY.push(inputRow - 2);
+  initialPointX.push(inputCol - 2);
+
+  // console.log(initialPointY, initialPointX);
+
+  mazeArray[initialPointY[0]][initialPointX[0]] = 1;
+
+  makeMaze(mazeArray, initialPointY[0], initialPointX[0], inputRow, inputCol);
 
   return mazeArray;
 }
@@ -154,6 +174,24 @@ function printMaze(mazeArray, inputRow, inputCol) {
       trArray[i].appendChild(tdArray[i][j]);
     }
     tableBody.appendChild(trArray[i]);
+  }
+
+  // 現在地点のindexを取得
+  let currentIndexY = 0;
+  let currentIndexX = 0;
+
+  for (let i = 0; i < inputRow; i++) {
+    if (mazeArray[i].indexOf(2) !== -1) {
+      currentIndexY = i;
+      currentIndexX = mazeArray[i].indexOf(2);
+    }
+  }
+
+  // ゴール
+  if (currentIndexY === inputRow - 2 && currentIndexX === inputCol - 2) {
+    clearedMaze();
+  } else {
+    removeClear();
   }
 }
 
@@ -294,22 +332,39 @@ function left() {
   printMaze(maze, inputRow, inputCol);
 }
 
-let mazeMake = document.getElementById("generateMaze");
+function clearedMaze() {
+  // クリアを表示
+  // console.log(`Congratulations! Maze clear!`);
+  window.location.href = "clear.html";
+}
 
+function removeClear() {
+  if (document.getElementsByTagName("clearedMassage").length !== 0) {
+    const previousMessage = document.getElementById("clearedMassage");
+    previousMessage.remove();
+  }
+}
+
+const initialPointY = [];
+const initialPointX = [];
+
+//x軸のベクトル
 const dx = [
   [1, 2],
   [-1, -2],
   [0, 0],
   [0, 0],
-]; //x軸のベクトル
+];
+//y軸のベクトル
 const dy = [
   [0, 0],
   [0, 0],
   [1, 2],
   [-1, -2],
-]; //y軸のベクトル
+];
 
 let maze = [];
+let mazeMake = document.getElementById("generateMaze");
 mazeMake.addEventListener("click", clicked);
 
 document.addEventListener("keydown", function (event) {
