@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+
+  <link href="style.css" rel="stylesheet" type="text/css">
+  
+  <title>ランダム迷路</title>
+</head>
+
+<body>
+  <h2 id="title">ランダム迷路</h2>
+
+  <!-- ボタン -->
+  <!-- <input id="inputRow"> -->
+  <p class="description">行数と列数を選択すると迷路が生成されます。</p>
+  <p class="crossKeyDescription">十字キーで操作できます。</p>
+  <div class="settingOfRowAndCol">
+    <p>row = </p>
+    <select name="row" id="inputRow">
+      <option value="5">5</option>
+      <option value="15">15</option>
+      <option value="25">25</option>
+      <option value="35">35</option>
+    </select>
+    <!-- <input id="inputCol"> -->
+    <p>col = </p>
+    <select name="col" id="inputCol">
+      <!-- <option value="5">5</option> -->
+      <option value="15">15</option>
+      <option value="25">25</option>
+      <option value="35">35</option>
+      <option value="45">45</option>
+      <option value="55">55</option>
+      <option value="65">65</option>
+      <option value="75">75</option>
+      <option value="85">85</option>
+      <option value="95">95</option>
+    </select>
+  </div>
+  <div class="generateMazeButton">
+    <button id="generateMaze" type="button">迷路生成</button>
+  </div>
+
+  <div class="timerClass">
+    <p id="timer">00:00:00</p>
+  </div>
+
+
+<script type="text/javascript" src="script.js"></script>
+<script type="text/javascript" src="crossKey.js"></script>
+<script type="text/javascript" src="timeCount.js"></script>
+
+</html>
