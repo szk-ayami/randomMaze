@@ -191,13 +191,23 @@ function printMaze(mazeArray, inputRow, inputCol) {
   // ゴール
   if (currentIndexY === inputRow - 2 && currentIndexX === inputCol - 2) {
     clearedMaze();
-    // timerStop();
   }
 }
 
 // 「迷路生成」が押された時
 function clicked() {
-  // timerStart();
+  // clearMessageを消す
+  if (document.getElementById("message") !== null) {
+    const message = document.getElementById("message");
+    message.remove();
+  }
+
+  // ボタンを無効化
+  const button = document.getElementById("generateMaze");
+  button.disabled = true;
+
+  // timerをスタートさせる
+  timerStart();
 
   // 行列の数を取得する
   const row = document.getElementById("inputRow");
@@ -206,12 +216,15 @@ function clicked() {
   const inputRow = Number(row.value);
   const inputCol = Number(col.value);
 
+  // 行列入力の無効化
+  row.disabled = true;
+  col.disabled = true;
+
   // mazeに0で埋めたrow行col列の配列を作る
   if (maze.length !== 0) {
     maze.splice(0);
   }
   zeros(maze);
-  const zeroMaze = maze.map((list) => [...list]);
 
   // 迷路を生成
   makeMazeBase(maze, inputRow, inputCol);
@@ -223,131 +236,41 @@ function clicked() {
   printMaze(maze, inputRow, inputCol);
 }
 
-// 「↑」が押された時
-function up() {
-  // 行列の数を取得する
-  const row = document.getElementById("inputRow");
-  const col = document.getElementById("inputCol");
-
-  const inputRow = Number(row.value);
-  const inputCol = Number(col.value);
-
-  // 現在地点のindexを取得
-  let currentIndexY = 0;
-  let currentIndexX = 0;
-
-  for (let i = 0; i < inputRow; i++) {
-    if (maze[i].indexOf(2) !== -1) {
-      currentIndexY = i;
-      currentIndexX = maze[i].indexOf(2);
-    }
-  }
-
-  // 上が通路なら進んで、元の場所を通路に戻す
-  if (maze[currentIndexY - 1][currentIndexX] === 1) {
-    maze[currentIndexY][currentIndexX] = 1;
-    maze[currentIndexY - 1][currentIndexX] = 2;
-  }
-
-  printMaze(maze, inputRow, inputCol);
-}
-
-// 「↓」が押された時
-function down() {
-  // 行列の数を取得する
-  const row = document.getElementById("inputRow");
-  const col = document.getElementById("inputCol");
-
-  const inputRow = Number(row.value);
-  const inputCol = Number(col.value);
-
-  // 現在地点のindexを取得
-  let currentIndexY = 0;
-  let currentIndexX = 0;
-
-  for (let i = 0; i < inputRow; i++) {
-    if (maze[i].indexOf(2) !== -1) {
-      currentIndexY = i;
-      currentIndexX = maze[i].indexOf(2);
-    }
-  }
-
-  // 上が通路なら進んで、元の場所を通路に戻す
-  if (maze[currentIndexY + 1][currentIndexX] === 1) {
-    maze[currentIndexY][currentIndexX] = 1;
-    maze[currentIndexY + 1][currentIndexX] = 2;
-  }
-
-  printMaze(maze, inputRow, inputCol);
-}
-
-// 「→」が押された時
-function right() {
-  // 行列の数を取得する
-  const row = document.getElementById("inputRow");
-  const col = document.getElementById("inputCol");
-
-  const inputRow = Number(row.value);
-  const inputCol = Number(col.value);
-
-  let currentIndexY = 0;
-  let currentIndexX = 0;
-
-  for (let i = 0; i < inputRow; i++) {
-    if (maze[i].indexOf(2) !== -1) {
-      currentIndexY = i;
-      currentIndexX = maze[i].indexOf(2);
-    }
-  }
-
-  // 上が通路なら進んで、元の場所を通路に戻す
-  if (maze[currentIndexY][currentIndexX + 1] === 1) {
-    maze[currentIndexY][currentIndexX] = 1;
-    maze[currentIndexY][currentIndexX + 1] = 2;
-  }
-
-  printMaze(maze, inputRow, inputCol);
-}
-
-// 「←」が押された時
-function left() {
-  // 行列の数を取得する
-  const row = document.getElementById("inputRow");
-  const col = document.getElementById("inputCol");
-
-  const inputRow = Number(row.value);
-  const inputCol = Number(col.value);
-
-  // 現在地点のindexを取得
-  let currentIndexY = 0;
-  let currentIndexX = 0;
-
-  for (let i = 0; i < inputRow; i++) {
-    if (maze[i].indexOf(2) !== -1) {
-      currentIndexY = i;
-      currentIndexX = maze[i].indexOf(2);
-    }
-  }
-
-  // 上が通路なら進んで、元の場所を通路に戻す
-  if (maze[currentIndexY][currentIndexX - 1] === 1) {
-    maze[currentIndexY][currentIndexX] = 1;
-    maze[currentIndexY][currentIndexX - 1] = 2;
-  }
-
-  printMaze(maze, inputRow, inputCol);
-}
-
+// クリアを表示
 function clearedMaze() {
-  // クリアを表示
-  window.location.href = "clear.html";
-}
+  // ボタンを有効化
+  const button = document.getElementById("generateMaze");
+  button.disabled = false;
 
-function removeClear() {
-  if (document.getElementsByTagName("clearedMassage").length !== 0) {
-    const previousMessage = document.getElementById("clearedMassage");
-    previousMessage.remove();
+  // 行列の数を取得する
+  const row = document.getElementById("inputRow");
+  const col = document.getElementById("inputCol");
+
+  // 行列入力の無効化
+  row.disabled = false;
+  col.disabled = false;
+
+  // clearMessageを消す
+  if (document.getElementById("message") !== null) {
+    const message = document.getElementById("message");
+    message.remove();
   }
+
+  // 文字を出力
+  const clearedMassage = document.createElement("p");
+  clearedMassage.id = "message";
+  clearedMassage.innerHTML = `Congratulations!<br>Maze clear!`;
+  clearedMassage.style.textAlign = "center";
+  clearedMassage.style.fontSize = "10vh";
+  clearedMassage.style.margin = "0";
+  document.body.appendChild(clearedMassage);
+
+  // timer止める
+  window.onload = timerStop();
+
+  // 迷路を消す
+  const previousTable = document.getElementById("maze");
+  previousTable.remove();
 }
 
 const initialPointY = [];
@@ -371,19 +294,3 @@ const dy = [
 const maze = [];
 let mazeMake = document.getElementById("generateMaze");
 mazeMake.addEventListener("click", clicked);
-
-document.addEventListener("keydown", function (event) {
-  if (event.key === "ArrowUp") {
-    event.preventDefault();
-    up();
-  } else if (event.key === "ArrowDown") {
-    event.preventDefault();
-    down();
-  } else if (event.key === "ArrowLeft") {
-    event.preventDefault();
-    left();
-  } else if (event.key === "ArrowRight") {
-    event.preventDefault();
-    right();
-  }
-});
