@@ -7,7 +7,6 @@
 body{
     height: 100vh;
     text-align: center;
-    /* font-family: "Gill Sans"; */
     font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
@@ -23,8 +22,6 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    /* flex-basis: auto; */
-    
     margin: 0 auto;
 }
 
@@ -57,15 +54,6 @@ body{
     margin: 0 auto;
 }
 
-#message{
-    margin: 0 auto;
-    display: table-cell;
-    vertical-align: middle;
-
-
-    font-size: 5vh;
-    /* border: 1px solid black; */
-
-    width: 55vh;
-    height: 20vh;
+#timer {
+    font-size: 2.5vh;
 }
