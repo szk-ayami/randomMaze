@@ -234,6 +234,7 @@ function clicked() {
 
   // 迷路を出力
   printMaze(maze, inputRow, inputCol);
+  console.log(maze)
 }
 
 // クリアを表示
